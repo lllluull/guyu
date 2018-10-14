@@ -1,13 +1,46 @@
 {
   "pages": [
-    "pages/index/main",
-    "pages/logs/main",
-    "pages/counter/main"
+    "pages/books/main",
+    "pages/me/main"
+  ],
+  "subPackages": [
+    {
+      "root": "pages/pa",
+      "pages": [
+        "pages/detailsec/main",
+        "pages/detailthird/main",
+        "pages/fiction/main",
+        "pages/detail/main",
+        "pages/sreach/main",
+        "pages/echart1/main",
+        "pages/echart2/main"
+      ]
+    }
+
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle": "black"
+    "navigationBarBackgroundColor": "#EA5149",
+    "navigationBarTitleText": "古月书社",
+    "navigationBarTextStyle": "black",
+    "enablePullDownRefresh": true,
+    "onReachBottomDistance":50
+  },
+  "tabBar": {
+    "selectedColor": "#EA5149",
+    "list": [
+    {
+      "pagePath": "pages/books/main",
+      "text": "首页",
+      "iconPath": "static/img/book.png",
+      "selectedIconPath": "static/img/bookactive.png"
+    },
+    {
+      "pagePath": "pages/me/main",
+      "text": "个人中心",
+      "iconPath": "static/img/person.png",
+      "selectedIconPath": "static/img/personactive.png"
+    }
+  ]
   }
 }

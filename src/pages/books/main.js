@@ -1,5 +1,6 @@
 import Vue from 'vue'
-import App from './index'
+import App from './books'
 
+Vue.config.productionTip = false
 const app = new Vue(App)
 app.$mount()
