@@ -41,5 +41,6 @@ router.get('/getdouban', controllers.getdouban)
 router.get('/getdouban1', controllers.getdouban1)
 router.get('/detail2', controllers.detail2)
 router.get('/detailcomment', controllers.detailcomment)
+router.post('/mybooks', controllers.mybooks)
 
 module.exports = router

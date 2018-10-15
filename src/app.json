@@ -12,7 +12,18 @@
         "pages/fiction/main",
         "pages/detail/main",
         "pages/sreach/main",
-        "pages/echart1/main",
+        "pages/mybook/main"
+      ]
+    },
+    {
+      "root": "pages/pb",
+      "pages": [
+        "pages/echart1/main"
+      ]
+    },
+    {
+      "root": "pages/pc",
+      "pages": [
         "pages/echart2/main"
       ]
     }

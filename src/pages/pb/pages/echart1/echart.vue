@@ -1,9 +1,10 @@
 <template>
-  <div class="main">
-    <div class="echarts-wrap">
-      <mpvue-echarts :echarts="echarts" :onInit="ecBarInit" canvasId="bar" />
-    </div>
+  <div class="mian">
+      <div class="echarts-wrap">
+        <mpvue-echarts :echarts="echarts" :onInit="ecBarInit" canvasId="bar" />
+      </div>
   </div>
+
 </template>
 
 <script>
@@ -100,7 +101,7 @@ export default {
   width: 100%;
   height: 300px;
 }
-.main{
+.mian{
   width: 100%;
   height: 100%;
   display: flex;

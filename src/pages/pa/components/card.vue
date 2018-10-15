@@ -15,7 +15,7 @@
           </div>
         </div>
       </div>
-      <div class="right">
+      <div class="right" @click.stop.prevent = 'tovalue'>
         <span class='iconfont'>&#xe61a;</span>
       </div>
     </div>
@@ -34,6 +34,10 @@
           urls: [this.book.image],
           current: this.book.image
         })
+      },
+      tovalue() {
+        console.log('child')
+        this.$emit('bookinfo', this.book)
       }
     },
     computed:{
@@ -43,9 +47,11 @@
       detailUrl() {
         if(this.book.rating) {
           return `/pages/pa/pages/detailsec/main?id=${JSON.stringify(this.book)}`
-        } if (this.book.last) {
+        } else if (this.book.last) {
           return `/pages/pa/pages/detailthird/main?id=${this.book.id}`
-        } else {
+        } else if (this.book.price) {
+          return `/pages/pa/pages/detailthird/main?id=${this.book.bookid}`
+        }else {
           return `/pages/detail/main?id=${this.book.id}`
         }
       }

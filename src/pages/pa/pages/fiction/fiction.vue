@@ -10,7 +10,7 @@
     </div>
     <div>
       <div>
-        <mycard v-for = 'book in booklist' :key = book.id :book='book' :rate = 'book.rate'></mycard>
+        <mycard v-for = 'book in booklist' :key = book.id :book='book' :rate = 'book.rate' @bookinfo = 'bookinfo'></mycard>
     </div>
     </div>
     <div class="loading" v-if='more'><img src="../../../../../static/img/loading_green.gif" class='loadingimg'></div>
@@ -18,11 +18,25 @@
         <div class="line"></div>
         <div class="inline">The End</div>
       </div>
+      <div  class = 'pop' v-if='popshow'  @click = 'changshow'>
+      </div>
+      <div class="content" :style="{bottom: silderHeight}" :animation="animation1" >
+        <div class="realtitle">
+          <div class='innertitle'><img :src="bookinfof.image" ><div>{{bookinfof.title}}</div></div>
+        </div>
+        <div class="title" @click.prevent.stop = 'test'>
+          <div><span class='iconfont titleleft' > &#xe615;</span>标记为已读</div>
+        </div>
+        <div class="title">
+          <div><span class='iconfont titleleft'> &#xe609;</span>添加到书单</div>
+        </div>
+      </div>
   </div>
 </template>
 <script>
 import {get} from '@/util'
 import mycard from '../../components/card'
+
 export default {
   data() {
     return{
@@ -30,7 +44,11 @@ export default {
       book_fiction: [],
       total: 0,
       page: 0,
-      booklist: []
+      booklist: [],
+      bookinfof: {},
+      popshow: false,
+      animation1: '',
+      animation2: ''
     }
   },
   methods: {
@@ -71,6 +89,34 @@ export default {
         })
       })
     },
+    bookinfo(value) {
+      this.bookinfof = value
+      this.popshow = true
+      this.test()
+    },
+    changshow() {
+      this.popshow = false
+      this.bookinfof = {}
+      this.test1()
+
+    },
+    test() {
+        var animation1 = wx.createAnimation({
+        duration: 1000,
+        timingFunction: 'ease',
+      })
+      animation1.translateY(-180).step()
+      this.animation1 = animation1.export();
+      },
+      test1() {
+        var animation1 = wx.createAnimation({
+        duration: 1000,
+        timingFunction: 'ease',
+      })
+      animation1.translateY(180).step()
+      this.animation1 = animation1.export();
+      }
+
   },
   computed: {
     more(){
@@ -176,6 +222,57 @@ export default {
   height: 80rpx;
   width: 80rpx;
 }
-
+.pop{
+  position: fixed;
+  top:0;
+  bottom: 0;
+  left:0;
+  right:0;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.content{
+  position: fixed;
+  bottom:-180px;
+  left: 0;
+  right: 0;
+  height: 180px;
+  background-color: rgba(41, 40, 40, 0.8);
+  opacity: 0.8;
+  z-index: 100;
+  border-top-left-radius: 20rpx;
+  border-top-right-radius: 20rpx;
+}
+.title{
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 26rpx;
+  color: rgb(243, 239, 239);
+  border-bottom: 1px solid rgb(75, 73, 73);
+  display: flex;
+  justify-content: center;
+}
+.titleleft{
+  color: red;
+  padding-right: 30rpx;
+}
+.realtitle{
+  height: 100rpx;;
+  font-size: 30rpx;
+  color: rgb(247, 65, 65);
+  line-height: 100rpx;
+  padding-left: 20rpx;
+  border-bottom: 1px solid rgb(100, 100, 100);
+}
+.realtitle img{
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+}
+.innertitle{
+  display: flex;
+  align-items: center
+}
 </style>
 

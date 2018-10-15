@@ -6,14 +6,17 @@
 <script>
 import {post} from '@/util'
     export default {
-      props: [
-        'userinfo'
-      ],
+      data() {
+        return {
+          userinfo: {}
+        }
+      },
       methods: {
         scanpic () {
           wx.scanCode({
             success: (res) => {
               this.addbook(res.result)
+              console.log(res.result)
             },
             fail: (res) => {
               wx.showModal({
@@ -25,25 +28,39 @@ import {post} from '@/util'
           })
         },
         async addbook (isbn) {
-          const res = await post('/weapp/addbook', {
-            isbn,
-            openid: this.userinfo.openId
-          })
-          if(res.code === -1) {
-            wx.showModal({
-                title: '提示',
-                content: '添加失败',
-                showCancel: false,
+          try {
+            const res = await post('/weapp/addbook', {
+                isbn,
+                openid: this.userinfo.openId
               })
-              return
+              if(res.code === -1) {
+                wx.showModal({
+                    title: '提示',
+                    content: '添加失败',
+                    showCancel: false,
+                  })
+                  return
+              }
+              wx.showModal({
+                    title: '提示',
+                    content: res.message,
+                    showCancel: false,
+                  })
+            } catch(e) {
+              wx.showModal({
+                    title: '失败',
+                    content: '找不到该书',
+                    showCancel: false,
+                  })
+            }
           }
-          wx.showModal({
-                title: '提示',
-                content: res.message,
-                showCancel: false,
-              })
+
+      },
+      mounted() {
+        if(wx.getStorageSync('userinfo')) {
+          this.userinfo = wx.getStorageSync('userinfo')
         }
-      }
+      },
     }
 </script>
 <style>

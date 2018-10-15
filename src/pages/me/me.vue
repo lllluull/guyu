@@ -22,9 +22,9 @@
           <div class="subtitle" v-if='flag1' @click = 'toechart2'><span>我的看书偏好</span> <span class='iconfont' >&#xe610;</span></div>
         </div>
         <div class="firstshow">
-          <div class="title" @click = 'changeflag2' v-if='!flag2'><span class='iconfont'>&#xe610;</span>我的藏书</div>
-          <div class="title" @click = 'changeflag2' v-if='flag2'> <span class='iconfont'>&#xe602;</span>我的藏书</div>
-          <div class="subtitle" v-if='flag2'> <span>我的书库</span> <span class='iconfont' >&#xe610;</span> </div>
+          <div class="title"  v-if='!flag2' @click = 'changeflag2'><span class='iconfont'>&#xe610;</span>我的藏书</div>
+          <div class="title"  v-if='flag2' @click = 'changeflag2'> <span class='iconfont'>&#xe602;</span>我的藏书</div>
+          <div class="subtitle" v-if='flag2' @click = 'tomybook'> <span>我的书库</span> <span class='iconfont' >&#xe610;</span> </div>
           <div class="subtitle" v-if='flag2'><span>我的书单</span> <span class='iconfont' >&#xe610;</span></div>
           <div class="subtitle" v-if='flag2'> <span>分享的书</span> <span class='iconfont' >&#xe610;</span> </div>
         </div>
@@ -52,12 +52,17 @@ import getuser from '@/components/getuserinfo'
       },
       toechart1() {
         wx.navigateTo({
-          url:`/pages/pa/pages/echart1/main`
+          url:`/pages/pb/pages/echart1/main`
         })
       },
       toechart2() {
         wx.navigateTo({
-          url:`/pages/pa/pages/echart2/main`
+          url:`/pages/pc/pages/echart2/main`
+        })
+      },
+      tomybook() {
+        wx.navigateTo({
+          url:`/pages/pa/pages/mybook/main`
         })
       }
     },

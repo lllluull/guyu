@@ -47,13 +47,13 @@ import mycard from '../../components/card'
         this.input = item
       }
     },
+    //
     watch: {
       input(newinput) {
         this.booklist = []
         clearTimeout(this.timer)
         this.timer = null
         this.timer = setTimeout(() => {
-          console.log(newinput, this.history)
           this.getresult()
           if (!this.history.includes(newinput)&&newinput!== ''){
               this.history.push(newinput)

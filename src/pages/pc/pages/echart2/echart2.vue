@@ -1,6 +1,8 @@
 <template>
-  <div class="echarts-wrap">
-    <mpvue-echarts :echarts="echarts" :onInit="ecScatterInit" canvasId="scatter" />
+  <div class="mian">
+    <div class="echarts-wrap">
+      <mpvue-echarts :echarts="echarts" :onInit="ecScatterInit" canvasId="scatter" />
+    </div>
   </div>
 </template>
 
@@ -36,7 +38,7 @@ export default {
     optiontop() {
       return {
           backgroundColor: "#ffffff",
-          color: ["#37A2DA", "#FF9F7F"],
+          color: ["red", "red"],
           tooltip: {},
           xAxis: {
             show: false
@@ -46,9 +48,10 @@ export default {
           },
           title:{
             text:'我的读书偏好',
+            left: '5%' ,
             textStyle:{
                 //文字颜色
-                color:'#ccc',
+                color:'red',
                 //字体风格,'normal','italic','oblique'
                 fontStyle:'normal',
                 //字体粗细 'normal','bold','bolder','lighter',100 | 200 | 300 | 400...
@@ -110,5 +113,12 @@ export default {
 .echarts-wrap {
   width: 100%;
   height: 300px;
+}
+.mian{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
