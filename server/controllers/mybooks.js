@@ -1,10 +1,9 @@
 const {mysql} = require('../qcloud')
 module.exports = async (ctx) => {
-    console.log(ctx.request.body.openid, '------------------------------------')
     let openid = ctx.request.body.openid
-    let read = ctx.request.body.read
+    let readed = ctx.request.body.read
     let info = {}
-    if (read === 2) {
+    if (readed === 2) {
         info = await mysql('books')
                       .select('books.*', 'cSessionInfo.user_info')
                       .where('openid', openid)
@@ -13,7 +12,7 @@ module.exports = async (ctx) => {
         info = await mysql('books')
           .select('books.*', 'cSessionInfo.user_info')
           .where('openid', openid)
-          .where('read', read)
+          .where('readed', readed)
           .join('cSessionInfo', 'books.openid', 'cSessionInfo.open_id ')
     }
 

@@ -25,7 +25,8 @@
           <div class="title"  v-if='!flag2' @click = 'changeflag2'><span class='iconfont'>&#xe610;</span>我的藏书</div>
           <div class="title"  v-if='flag2' @click = 'changeflag2'> <span class='iconfont'>&#xe602;</span>我的藏书</div>
           <div class="subtitle" v-if='flag2' @click = 'tomybook'> <span>我的书库</span> <span class='iconfont' >&#xe610;</span> </div>
-          <div class="subtitle" v-if='flag2'><span>我的书单</span> <span class='iconfont' >&#xe610;</span></div>
+          <div class="subtitle" v-if='flag2'  @click = 'tomybooklist'><span>我的书单</span> <span class='iconfont' >&#xe610;</span></div>
+          <div class="subtitle" v-if='flag2'  @click = 'toaddbook'><span>添加图书</span> <span class='iconfont' >&#xe610;</span></div>
           <div class="subtitle" v-if='flag2'> <span>分享的书</span> <span class='iconfont' >&#xe610;</span> </div>
         </div>
       </div>
@@ -64,7 +65,18 @@ import getuser from '@/components/getuserinfo'
         wx.navigateTo({
           url:`/pages/pa/pages/mybook/main`
         })
+      },
+      tomybooklist() {
+        wx.navigateTo({
+          url:`/pages/pa/pages/mybooklists/main`
+        })
+      },
+      toaddbook() {
+        wx.navigateTo({
+          url:`/pages/pa/pages/addbook/main`
+        })
       }
+
     },
     components: {
       myprogress,

@@ -31,7 +31,6 @@ router.post('/tunnel', controllers.tunnel.post)
 router.get('/message', controllers.message.get)
 // POST 用来处理微信转发过来的客服消息
 router.post('/message', controllers.message.post)
-router.get('/demo', controllers.demo)
 router.post('/addbook', controllers.addbook)
 router.get('/booklist', controllers.booklist)
 router.get('/detail', controllers.detail)
@@ -42,5 +41,11 @@ router.get('/getdouban1', controllers.getdouban1)
 router.get('/detail2', controllers.detail2)
 router.get('/detailcomment', controllers.detailcomment)
 router.post('/mybooks', controllers.mybooks)
-
+router.get('/updateread', controllers.updateread)
+router.get('/addbooklist', controllers.addbooklist)
+router.get('/getbooklist', controllers.getbooklist)
+router.get('/addonebook', controllers.addonebook)  // 添加一本书到书单
+router.get('/delbooklist', controllers.delbooklist)  // 删除一个书单
+router.get('/detailbooklist', controllers.detailbooklist)  // 获取书单的详情页
+router.get('/delbooklistone', controllers.delbooklistone) // 删除书单中的书
 module.exports = router

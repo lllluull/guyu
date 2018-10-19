@@ -1,12 +1,13 @@
 const axios = require('axios')
 module.exports = async(ctx) => {
     let page = ctx.request.query.page
+    let offset = page * 10
     function jsonp (item) {
         return new Promise((resolve, reject) => {
             resolve(item)
         })
     }
-    const res = await axios.get(`https://m.douban.com/rexxar/api/v2/subject_collection/book_nonfiction/items?os=windows&callback=jsonp&start=${page}&count=10&loc_id=0&_=1539076932889`,
+    const res = await axios.get(`https://m.douban.com/rexxar/api/v2/subject_collection/book_nonfiction/items?os=windows&callback=jsonp&start=${offset}&count=10&loc_id=0&_=1539076932889`,
         {
             headers: {
                 'Referer': 'https://m.douban.com/book/'

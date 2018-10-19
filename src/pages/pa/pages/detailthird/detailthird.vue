@@ -58,7 +58,7 @@
     </div>
 </template>
 <script>
-import {get} from '@/util'
+import {get, createbookinfo} from '@/util'
 import comcard from '../../components/commentcard'
 import loading1 from '../../components/loading'
 export default {
@@ -323,7 +323,8 @@ export default {
   padding-right: 20rpx;
   height: 50rpx;
   line-height: 50rpx;
-}
+  margin-top: 5rpx;
+  }
 .intro{
 
 

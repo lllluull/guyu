@@ -8,7 +8,6 @@ module.exports = async (ctx) => {
                         .select('books.*', 'cSessionInfo.user_info')
                         .join('cSessionInfo', 'books.openid', 'cSessionInfo.open_id ')
                         .where('id', id).first()
-    console.log(info)
     if (info) {
         ctx.state.data = {
             message: info

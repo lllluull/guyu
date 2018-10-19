@@ -122,7 +122,10 @@ import {get, getLocation} from '@/util'
     this.info = {}
     this.summary = []
     this.tags = []
-  }
+    },
+     onPullDownRefresh(e) {
+        wx.stopPullDownRefresh();
+    }
   }
 </script>
 <style scoped>

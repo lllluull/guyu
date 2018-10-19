@@ -1,58 +1,69 @@
 <template>
-<a :href="detailUrl">
-    <div class="main">
+    <div class="main" @click="tobookdetail">
       <div class="left">
         <div class="img">
-          <img :src=book.image mode = 'aspectFit' @click.stop='preview'>
+          <img :src=book.imgUrl mode = 'aspectFit' @click.stop='preview'>
         </div>
         <div class='des'>
           <div class='cardtitle'>{{book.title}}</div>
           <div class='rate'>
-            {{rate1}}     {{rate}}
+            {{rate1}}     {{book.ratevalue}}
           </div>
           <div class='dessub'>
-            {{book.author}} / {{book.publisher}} / {{book.pubdate}}
+            {{book.author}} / {{book.publish}}
           </div>
         </div>
       </div>
-      <div class="right" @click.stop.prevent = 'tovalue'>
-        <span class='iconfont'>&#xe61a;</span>
+      <div class="right" v-if='active' @click='chosedel'>
+        <span class='iconfont myicon' :class="del? 'delred' : ''">&#xe61b;</span>
       </div>
     </div>
-    </a>
+
 </template>
 <script>
 
   export default {
     props: [
       'book',
-      'rate'
+      'active',
+      'dellist'
     ],
+    data() {
+      return {
+        del: false
+      }
+    },
+
     methods: {
       preview(){
         wx.previewImage({
-          urls: [this.book.image],
-          current: this.book.image
+          urls: [this.book.imgUrl],
+          current: this.book.imgUrl
         })
       },
-      tovalue() {
-        console.log('child')
-        this.$emit('bookinfo', this.book)
+      tobookdetail() {
+        if(this.active) {
+          return
+        }
+          wx.navigateTo({
+            url:`/pages/pa/pages/detailthird/main?id=${this.book.bookid}`
+          })
+      },
+      chosedel() {
+        this.del = !this.del
+        this.$emit('delitem', this.book.bookid, this.book.title)
       }
+
     },
     computed:{
       rate1() {
-        return "★★★★★☆☆☆☆☆".slice(5 - Math.round(this.rate)/2 , 10 -  Math.round(this.rate)/2)
-      },
-      detailUrl() {
-        if(this.book.rating) {
-          return `/pages/pa/pages/detailthird/main?id=${this.book.id}`
-        } else if (this.book.last) {
-          return `/pages/pa/pages/detailthird/main?id=${this.book.id}`
-        } else if (this.book.price) {
-          return `/pages/pa/pages/detailthird/main?id=${this.book.bookid}`
-        }else {
-          return `/pages/detail/main?id=${this.book.id}`
+        return "★★★★★☆☆☆☆☆".slice(5 - Math.round(this.book.ratevalue)/2 , 10 -  Math.round(this.book.ratevalue)/2)
+      }
+    },
+    watch: {
+      dellist() {
+        if(this.dellist.length<1) {
+          this.del = false
         }
       }
     }
@@ -115,5 +126,16 @@
     align-items: center;
     padding-right: 10px;
     font-size: 15px;
+  }
+  .myicon{
+    color:  rgb(240, 140, 10);
+    border-radius: 50%;
+    transition: 1s ease all;
+  }
+  .delred{
+    background-color: red;
+    color: red;
+    transition: 1s ease all;
+
   }
 </style>

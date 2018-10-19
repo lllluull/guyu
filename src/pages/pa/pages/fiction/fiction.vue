@@ -20,22 +20,23 @@
       </div>
       <div  class = 'pop' v-if='popshow'  @click = 'changshow'>
       </div>
-      <div class="content" :style="{bottom: silderHeight}" :animation="animation1" >
+      <div class="content"  :animation="animation1" >
         <div class="realtitle">
           <div class='innertitle'><img :src="bookinfof.image" ><div>{{bookinfof.title}}</div></div>
         </div>
-        <div class="title" @click.prevent.stop = 'test'>
-          <div><span class='iconfont titleleft' > &#xe615;</span>标记为已读</div>
+        <div class="title" @click.stop.prevent='test4'>
+          <div><span class='iconfont titleleft' > &#xe609;</span>添加到书单</div>
         </div>
-        <div class="title">
-          <div><span class='iconfont titleleft'> &#xe609;</span>添加到书单</div>
-        </div>
+      </div>
+      <div class='testtest' :animation="animation2">
+        <addmybooklist :bookinfof='bookinfof' @hidepop = 'hidepop'></addmybooklist>
       </div>
   </div>
 </template>
 <script>
 import {get} from '@/util'
 import mycard from '../../components/card'
+import addmybooklist from '../../components/tobooklist'
 
 export default {
   data() {
@@ -48,7 +49,8 @@ export default {
       bookinfof: {},
       popshow: false,
       animation1: '',
-      animation2: ''
+      animation2: '',
+      userinfo: {}
     }
   },
   methods: {
@@ -98,23 +100,47 @@ export default {
       this.popshow = false
       this.bookinfof = {}
       this.test1()
+      this.test3()
 
     },
     test() {
         var animation1 = wx.createAnimation({
-        duration: 1000,
+        duration: 500,
         timingFunction: 'ease',
       })
-      animation1.translateY(-180).step()
+      animation1.translateY(-140).step()
       this.animation1 = animation1.export();
       },
-      test1() {
+    test1() {
         var animation1 = wx.createAnimation({
-        duration: 1000,
+        duration: 500,
         timingFunction: 'ease',
       })
-      animation1.translateY(180).step()
+      animation1.translateY(140).step()
       this.animation1 = animation1.export();
+      },
+      test2() {
+          let animation2 = wx.createAnimation({
+        duration: 500,
+        timingFunction: 'ease',
+      })
+      animation2.translateY(-400).step()
+      this.animation2 = animation2.export();
+      },
+      test3() {
+          let animation2 = wx.createAnimation({
+        duration: 500,
+        timingFunction: 'ease',
+      })
+      animation2.translateY(400).step()
+      this.animation2 = animation2.export();
+      },
+      test4(){
+        this.test1()
+        this.test2()
+      },
+      hidepop() {
+        this.changshow()
       }
 
   },
@@ -128,7 +154,8 @@ export default {
     }
   },
   components: {
-    mycard
+    mycard,
+    addmybooklist
   },
   mounted() {
     this.page = 0
@@ -143,6 +170,9 @@ export default {
     } else {
       this.getdoubaninfo1()
     }
+    if(wx.getStorageSync('userinfo')) {
+        this.userinfo = wx.getStorageSync('userinfo')
+      }
   },
   onReachBottom() {
     if(!this.more) {
@@ -160,12 +190,15 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
   .header{
     height: 80rpx;
     width: 100%;
     display: flex;
-    align-items: center
+    align-items: center;
+    position: sticky;
+    top: 0;
+    background-color: #fff;
   }
   .headercontent1{
     height: 80rpx;
@@ -228,16 +261,16 @@ export default {
   bottom: 0;
   left:0;
   right:0;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(12, 12, 12, 0.3);
 }
 .content{
   position: fixed;
-  bottom:-180px;
+  bottom:-140px;
   left: 0;
   right: 0;
-  height: 180px;
-  background-color: rgba(41, 40, 40, 0.8);
-  opacity: 0.8;
+  height: 140px;
+  background-color: rgb(252, 252, 252);
+  opacity: 1;
   z-index: 100;
   border-top-left-radius: 20rpx;
   border-top-right-radius: 20rpx;
@@ -247,8 +280,7 @@ export default {
   height: 80rpx;
   line-height: 80rpx;
   font-size: 26rpx;
-  color: rgb(243, 239, 239);
-  border-bottom: 1px solid rgb(75, 73, 73);
+  color: rgb(114, 112, 112);
   display: flex;
   justify-content: center;
 }
@@ -262,7 +294,7 @@ export default {
   color: rgb(247, 65, 65);
   line-height: 100rpx;
   padding-left: 20rpx;
-  border-bottom: 1px solid rgb(100, 100, 100);
+  border-bottom: 1px solid rgb(136, 135, 135);
 }
 .realtitle img{
   width: 80rpx;
@@ -273,6 +305,14 @@ export default {
 .innertitle{
   display: flex;
   align-items: center
+}
+.testtest{
+  width: 100%;
+  height: 400px;
+  position: fixed;
+  bottom: -400px;
+  left:0;
+  z-index: 10;
 }
 </style>
 

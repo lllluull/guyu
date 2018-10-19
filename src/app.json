@@ -12,7 +12,12 @@
         "pages/fiction/main",
         "pages/detail/main",
         "pages/sreach/main",
-        "pages/mybook/main"
+        "pages/mybook/main",
+        "pages/mybooklists/main",
+        "pages/addbooklist/main",
+        "pages/booklistdetail/main",
+        "pages/addbook/main"
+
       ]
     },
     {

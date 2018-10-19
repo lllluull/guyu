@@ -1,9 +1,8 @@
 <template>
   <div>
-    <div v-if='!userinfo.nickName' class='showall'>
-      <button open-type="getUserInfo" lang="zh_CN" @getuserinfo="doLogin">获取用户信息</button>
-    </div>
+
     <div class='mainme'>
+      <button open-type="getUserInfo" lang="zh_CN" @getuserinfo="doLogin" v-if='!userinfo.nickName' class='info'>点击使用</button>
       <img :src=userinfo.avatarUrl >
       <p>{{userinfo.nickName}}</p>
     </div>
@@ -126,5 +125,12 @@
     justify-content: center;
     align-items: center;
     z-index: 100;
+  }
+  .info{
+    height: 180rpx;
+    width: 180rpx;
+    font-size: 22rpx;
+    border-radius: 50%;
+    line-height: 180rpx;
   }
 </style>
